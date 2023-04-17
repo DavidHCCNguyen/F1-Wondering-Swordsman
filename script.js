@@ -1,24 +1,27 @@
 // Set up variables
-let location = "forest";
+let currentLocation = "forest";
 let choices = "What would you like to do?";
 let result = "";
+let health = 100;
+let strength = 10;
+let gold = 0;
 
 // Function to explore current location
 function explore() {
   let randomNum = Math.floor(Math.random() * 3);
   if (randomNum === 0) {
-    result = "You found some treasure!";
-  } else if (randomNum === 1) {
-    result = "You encountered a monster and defeated it!";
+    result = "You found a treasure chest! You gained 10 gold.";
+    gold += 10;
   } else {
-    result = "You found nothing of interest.";
+    result = "You didn't find anything on your exploration. Try again?";
   }
   updateGame();
 }
 
-// Function to rest and restore health
+// Function to rest and gain health
 function rest() {
-  result = "You rest and restore some health.";
+  health += 10;
+  result = "You feel refreshed after your rest. Your health increased by 10.";
   updateGame();
 }
 
@@ -26,24 +29,35 @@ function rest() {
 function travel() {
   let randomNum = Math.floor(Math.random() * 3);
   if (randomNum === 0) {
-    location = "mountains";
-    result = "You have arrived at the mountains.";
+    currentLocation = "desert";
+    choices = "You arrived at the desert. What would you like to do?";
+    result = "You survived the journey to the desert!";
   } else if (randomNum === 1) {
-    location = "desert";
-    result = "You have arrived at the desert.";
+    currentLocation = "mountain";
+    choices = "You arrived at the mountain. What would you like to do?";
+    result = "You survived the journey to the mountain!";
   } else {
-    location = "ocean";
-    result = "You have arrived at the ocean.";
+    currentLocation = "beach";
+    choices = "You arrived at the beach. What would you like to do?";
+    result = "You survived the journey to the beach!";
   }
+  health -= 10;
   updateGame();
 }
 
-// Function to update game display
+// Function to update the game screen
 function updateGame() {
-  document.getElementById("location").innerHTML = "You are currently in the " + location + ".";
+  document.getElementById("location").innerHTML = currentLocation;
   document.getElementById("choices").innerHTML = choices;
   document.getElementById("result").innerHTML = result;
+  document.getElementById("health").innerHTML = health;
+  document.getElementById("strength").innerHTML = strength;
+  document.getElementById("gold").innerHTML = gold;
+  
+  // Check if player has died
+  if (health <= 0) {
+    result = "You have died. Game over!";
+    document.getElementById("result").innerHTML = result;
+    document.getElementById("buttons").innerHTML = "";
+  }
 }
-
-// Initial game setup
-updateGame();

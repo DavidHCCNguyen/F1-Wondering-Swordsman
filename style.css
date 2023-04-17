@@ -17,6 +17,13 @@ h1 {
   color: #fa8072;
 }
 
+/* Style the game stats */
+#stats {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
 /* Style the game location and choices text */
 p {
   font-size: 24px;
@@ -40,5 +47,12 @@ button {
 /* Style the game buttons on hover */
 button:hover {
   transform: translateY(-3px);
-  box-shadow: 0px 
+  box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.3);
+}
+
+/* Style the game result text */
+#result {
+  font-size: 24px;
+  margin-top: 20px;
+  color: #2ecc71;
 }

@@ -1,19 +1,30 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta name="generator" content="HTML Tidy for Windows (vers 14 October 2008), see www.w3.org" />
-        <title>The Wandering Swordsman</title>
-        <link rel="stylesheet" href="style.css" type="text/css" />
-    </head>
-    <body>
-        <div id="game-container">
-        <h1>The Wandering Swordsman</h1>
-        <p id="location">You are currently in a forest.</p>
-        <p id="choices">What would you like to do?</p>
-        <button id="explore" onclick="explore()">Explore</button> 
-        <button id="rest" onclick="rest()">Rest</button> 
-        <button id="travel" onclick="travel()">Travel</button>
-        <p id="result"></p></div>
-        <script src="script.js" type="text/javascript"></script>
-    </body>
+<head>
+	<title>Wondering Swordsman</title>
+	<link href="https://fonts.googleapis.com/css?family=Pacifico&display=swap" rel="stylesheet">
+	<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+	<div id="game-container">
+		<h1>Wondering Swordsman</h1>
+		<div id="stats">
+			<p>Health: <span id="health">100</span></p>
+			<p>Strength: <span id="strength">10</span></p>
+			<p>Gold: <span id="gold">0</span></p>
+		</div>
+		<div id="location-choice">
+			<p>You are currently in the <span id="location">forest</span>.</p>
+			<p><span id="choices">What would you like to do?</span></p>
+			<div id="buttons">
+				<button onclick="explore()">Explore</button>
+				<button onclick="rest()">Rest</button>
+				<button onclick="travel()">Travel</button>
+			</div>
+			<p id="result"></p>
+		</div>
+	</div>
+
+	<script src="script.js"></script>
+</body>
 </html>
