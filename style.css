@@ -1,23 +1,44 @@
-body {
-    font-family: Arial, sans-serif;
-    text-align: center;
-  }
-  
-  h1 {
-    font-size: 2.5em;
-  }
-  
-  #game-container {
-    margin: 0 auto;
-    max-width: 600px;
-  }
-  
-  button {
-    margin: 10px;
-    padding: 10px;
-    font-size: 1.2em;
-  }
-  
-  #result {
-    font-weight: bold;
-  }
+/* Style the game container */
+#game-container {
+  margin: auto;
+  max-width: 600px;
+  text-align: center;
+  padding: 30px;
+  background-color: #fff;
+  border-radius: 20px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+}
+
+/* Style the game title */
+h1 {
+  font-size: 48px;
+  font-family: 'Pacifico', cursive;
+  margin-bottom: 20px;
+  color: #fa8072;
+}
+
+/* Style the game location and choices text */
+p {
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+/* Style the game buttons */
+button {
+  font-size: 24px;
+  padding: 10px 20px;
+  margin-right: 10px;
+  background-color: #fa8072;
+  border: none;
+  border-radius: 20px;
+  color: #fff;
+  cursor: pointer;
+  box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2);
+  transition: all 0.3s ease-in-out;
+}
+
+/* Style the game buttons on hover */
+button:hover {
+  transform: translateY(-3px);
+  box-shadow: 0px 
+}
