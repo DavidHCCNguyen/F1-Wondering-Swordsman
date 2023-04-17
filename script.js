@@ -6,53 +6,22 @@ let health = 100;
 let strength = 10;
 let gold = 0;
 
-function updateGame() {
-  // existing code...
+const resetBtn = document.getElementById("resetBtn");
 
-  // Save game state to local storage
-  try {
-    const gameState = {
-      currentLocation,
-      choices,
-      result,
-      health,
-      strength,
-      gold
-    };
-    localStorage.setItem("gameState", JSON.stringify(gameState));
-  } catch (error) {
-    console.error("Error saving game state to local storage:", error);
-  }
-
-  // Update game state if it has changed in another tab or window
-  window.addEventListener("storage", event => {
-    if (event.key === "gameState") {
-      const newState = JSON.parse(event.newValue);
-      currentLocation = newState.currentLocation;
-      choices = newState.choices;
-      result = newState.result;
-      health = newState.health;
-      strength = newState.strength;
-      gold = newState.gold;
-      updateGame();
-    }
-  });
-
-  // Load game state from local storage
-  const savedState = localStorage.getItem("gameState");
-  if (savedState !== null) {
-    const gameState = JSON.parse(savedState);
-    currentLocation = gameState.currentLocation;
-    choices = gameState.choices;
-    result = gameState.result;
-    health = gameState.health;
-    strength = gameState.strength;
-    gold = gameState.gold;
-    updateDisplay();
-  }
+function showResetButton() {
+  resetBtn.style.display = "block";
 }
 
-// Function to explore current location
+function resetGame() {
+  // Reset all variables to their initial values
+  health = 100;
+  strength = 10;
+  gold = 0;
+  
+  // Update the game UI
+  updateGame();
+}
+
 function explore() {
   let randomNum = Math.floor(Math.random() * 6);
   if (randomNum === 0) {
@@ -90,20 +59,26 @@ function explore() {
         result += "<br>The " + enemyType + " hits you. Your health is now " + health + ".";
       }
     }
-  } else {
-    let enemyType = "dragon";
-    let enemyHealth = 50;
-    let enemyStrength = 15;
+  } else if (randomNum === 5) {
+    let enemyType = "sorcerer";
+    let enemyHealth = 40;
+    let enemyStrength = Math.floor(Math.random() * 5) + 1; // Enemy strength can be 1-5
     result = "You encountered a " + enemyType + "!";
     result += " Battle ensues...";
     while (health > 0 && enemyHealth > 0) {
       enemyHealth -= strength;
       if (enemyHealth <= 0) {
-        result += "<br>You defeated the " + enemyType + " and gained 20 gold.";
-        gold += 20;
+        result += "<br>You defeated the " + enemyType + " and gained 15 gold.";
+        gold += 15;
       } else {
         health -= enemyStrength;
-        result += "<br>The " + enemyType + " hits you. Your health is now " + health + ".";
+        if (strength - enemyStrength >= 10) {
+          strength -= enemyStrength;
+          result += "<br>The " + enemyType + " hits you and lowers your strength by " + enemyStrength + ". Your strength is now " + strength + ".";
+        } else {
+          strength = 10;
+          result += "<br>The " + enemyType + " hits you and lowers your strength by " + enemyStrength + ". Your strength cannot go below 10. Your strength is now 10.";
+        }
       }
     }
   }
