@@ -6,6 +6,52 @@ let health = 100;
 let strength = 10;
 let gold = 0;
 
+function updateGame() {
+  // existing code...
+
+  // Save game state to local storage
+  try {
+    const gameState = {
+      currentLocation,
+      choices,
+      result,
+      health,
+      strength,
+      gold
+    };
+    localStorage.setItem("gameState", JSON.stringify(gameState));
+  } catch (error) {
+    console.error("Error saving game state to local storage:", error);
+  }
+
+  // Update game state if it has changed in another tab or window
+  window.addEventListener("storage", event => {
+    if (event.key === "gameState") {
+      const newState = JSON.parse(event.newValue);
+      currentLocation = newState.currentLocation;
+      choices = newState.choices;
+      result = newState.result;
+      health = newState.health;
+      strength = newState.strength;
+      gold = newState.gold;
+      updateGame();
+    }
+  });
+
+  // Load game state from local storage
+  const savedState = localStorage.getItem("gameState");
+  if (savedState !== null) {
+    const gameState = JSON.parse(savedState);
+    currentLocation = gameState.currentLocation;
+    choices = gameState.choices;
+    result = gameState.result;
+    health = gameState.health;
+    strength = gameState.strength;
+    gold = gameState.gold;
+    updateDisplay();
+  }
+}
+
 // Function to explore current location
 function explore() {
   let randomNum = Math.floor(Math.random() * 6);
