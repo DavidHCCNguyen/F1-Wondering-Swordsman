@@ -121,10 +121,10 @@ function rest() {
       let randomItem = Math.floor(Math.random() * 3);
       if (randomItem === 0) {
         result += " You received a health potion!";
-        healthPotions++;
+        health++;
       } else if (randomItem === 1) {
         result += " You received a strength potion!";
-        strengthPotions++;
+        strength++;
       } else {
         result += " You received a rare sword!";
         strength += 5;
