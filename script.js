@@ -23,7 +23,7 @@ function resetGame() {
 }
 
 function explore() {
-  let randomNum = Math.floor(Math.random() * 6);
+  let randomNum = Math.floor(Math.random() * 8);
   if (randomNum === 0) {
     result = "You found a treasure chest! You gained 10 gold.";
     gold += 10;
@@ -78,10 +78,56 @@ function explore() {
         } else {
           strength = 10;
           result += "<br>The " + enemyType + " hits you and lowers your strength by " + enemyStrength + ". Your strength cannot go below 10. Your strength is now 10.";
-        }
-      }
+        } 
+      } 
+    } 
+  } else if (randomNum === 6) {
+    let enemyType = "dragon";
+    let enemyHealth = 50;
+    let enemyStrength = 20;
+    result = "You encountered a " + enemyType + "!";
+    result += " Battle ensues...";
+    while (health > 0 && enemyHealth > 0) {
+    enemyHealth -= strength;
+    if (enemyHealth <= 0) {
+    result += "<br>You defeated the " + enemyType + " and gained 20 gold.";
+    gold += 20;
+    } else {
+    health -= enemyStrength;
+    if (strength - enemyStrength >= 10) {
+    strength -= enemyStrength;
+    result += "<br>The " + enemyType + " hits you and lowers your strength by " + enemyStrength + ". Your strength is now " + strength + ".";
+    } else {
+    strength = 10;
+    result += "<br>The " + enemyType + " hits you and lowers your strength by " + enemyStrength + ". Your strength cannot go below 10. Your strength is now 10.";
     }
-  }
+    }
+    }
+    } else if (randomNum === 7) {
+      let enemyType = "Lord Anti-Hero";
+      let enemyHealth = 80;
+      let enemyStrength = 15;
+      result = "You encountered " + enemyType + "!";
+      result += " Battle ensues...";
+      while (health > 0 && enemyHealth > 0) {
+      enemyHealth -= strength;
+      if (enemyHealth <= 0) {
+      result += "<br>You defeated " + enemyType + " and saved another kingdom!";
+      result += "<br>You gained 100 gold and 50 health.";
+      gold += 100;
+      health += 50;
+      } else {
+      health -= enemyStrength;
+      if (strength - enemyStrength >= 10) {
+      strength -= enemyStrength;
+      result += "<br>" + enemyType + " hits you and lowers your strength by " + enemyStrength + ". Your strength is now " + strength + ".";
+      } else {
+      strength = 10;
+      result += "<br>" + enemyType + " hits you and lowers your strength by " + enemyStrength + ". Your strength cannot go below 10. Your strength is now 10.";
+      }
+      }
+      }
+      }
   
   // Random gift
   let giftNum = Math.floor(Math.random() * 3);
@@ -89,8 +135,8 @@ function explore() {
     result += "<br>You found a health potion! Your health increased by 10.";
     health += 10;
   } else if (giftNum === 1) {
-    result += "<br>You found a strength potion! Your strength increased by 1.";
-    strength += 1;
+    result += "<br>You found a strength potion! Your strength increased by 5.";
+    strength += 5;
   } else {
     result += "<br>You found a bag of gold! You gained 15 gold.";
     gold += 15;
@@ -117,18 +163,8 @@ function rest() {
       result += " While resting, you encounter a hostile thief who steals 10 gold from you.";
       gold -= 10;
     } else {
-      result += " While resting, you find a lost child who rewards you with a rare item.";
-      let randomItem = Math.floor(Math.random() * 3);
-      if (randomItem === 0) {
-        result += " You received a health potion!";
-        health++;
-      } else if (randomItem === 1) {
-        result += " You received a strength potion!";
-        strength++;
-      } else {
-        result += " You received a rare sword!";
-        strength += 5;
-      }
+      result += " While resting, you find a lost child who rewards you with a health potion.";
+      health++;
     }
     
   } else {
@@ -136,6 +172,7 @@ function rest() {
   }
   updateGame();
 }
+
 
 
 // Function to travel to a new location
